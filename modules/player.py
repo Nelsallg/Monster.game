@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__
         self.health = 100
         self.max_health = 100
-        self.attck = 10
+        self.attack = 10
         self.velocity = 5
         self.image = pygame.image.load('assets/images/player.png')
         self.rect = self.image.get_rect()
@@ -15,5 +15,5 @@ class Player(pygame.sprite.Sprite):
         
     def move_right(self) -> None:
         self.rect.x += self.velocity
-    def move_left(self) -> None:
+    def move_left(self) -> None:gi
         self.rect.x -= self.velocity

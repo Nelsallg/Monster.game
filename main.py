@@ -29,6 +29,6 @@ while running:
         #detecter si un joueur lache une touche
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                game.player.move_right
+                game.player.move_right()
             elif event.key == pygame.K_LEFT:
-                game.player.move_left
+                game.player.move_left()
