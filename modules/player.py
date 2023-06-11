@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = 400
         self.rect.y = 500
         
-    def launch_projectile(self):
+    def launch_projectile(self) -> None:
         self.all_projectiles.add(Projectile(self))
         
     def move_right(self) -> None:
