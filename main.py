@@ -3,32 +3,44 @@ from modules.game import Game
 
 pygame.init()
 
-#Gerer la fenetre
+#Gérer les propriétés de la fenetre de jeu
 pygame.display.set_caption("Monster")
 screen = pygame.display.set_mode((1080,720))
 
 background = pygame.image.load('assets/images/bg.jpg')
 
-#Charger le joueur
+#créer une instance de la class Game
 game = Game()
 
 running = True
 while running:
-    #Executer la fenetre de jeu
+    #Appliquer le background à la fenetre de jeu
     screen.blit(background, (0,-200))
     
-    #Appliquer l'image  du joueur
+    #Insérer l'image du joueur dans la fenetre de jeu
     screen.blit(game.player.image, game.player.rect)
     
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+    
+    game.player.all_projectiles.draw(screen)
+    
+    #Gestion des déplacements du joueur
+    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
+        game.player.move_right()
+    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
+        game.player.move_left()
+        
     pygame.display.flip()
     for event in pygame.event.get():
+        #Gestion des évènements
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
             print("Fermeture de la fenetre en cours...")
-        #detecter si un joueur lache une touche
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                game.player.move_right()
-            elif event.key == pygame.K_LEFT:
-                game.player.move_left()
+            game.pressed[event.key] = True
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
