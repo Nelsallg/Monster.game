@@ -22,8 +22,12 @@ while running:
     
     for projectile in game.player.all_projectiles:
         projectile.move()
+        
+    for monster in game.all_monsters:
+        monster.forward()
     
     game.player.all_projectiles.draw(screen)
+    game.all_monsters.draw(screen)
     
     #Gestion des déplacements du joueur
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
@@ -31,6 +35,7 @@ while running:
     elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
         game.player.move_left()
         
+    
     pygame.display.flip()
     for event in pygame.event.get():
         #Gestion des évènements
