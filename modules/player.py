@@ -12,3 +12,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 400
         self.rect.y = 500
+        
+    def move_right(self) -> None:
+        self.rect.x += self.velocity
+    def move_left(self) -> None:
+        self.rect.x -= self.velocity
