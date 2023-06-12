@@ -1,5 +1,6 @@
 import pygame
 from modules.game import Game
+import math
 
 pygame.init()
 
@@ -9,6 +10,20 @@ screen = pygame.display.set_mode((1080,720))
 
 background = pygame.image.load('assets/images/bg.jpg')
 
+#Gestion de la banniere
+banner = pygame.image.load('assets/images/banner.png')
+banner = pygame.transform.scale(banner, (500,500))
+banner_rect = banner.get_rect()
+banner_rect.x = math.ceil(screen.get_width() / 4)
+banner_height = banner.get_height()
+#Gestion du boutton play
+play_button = pygame.image.load('assets/images/button.png')
+play_button = pygame.transform.scale(play_button, (400,150))
+play_button_rect = play_button.get_rect()
+play_button_rect.x = math.ceil(screen.get_width() / 3.33)
+play_button_rect.y = math.ceil(screen.get_height() / 2)
+
+
 #créer une instance de la class Game
 game = Game()
 
@@ -16,35 +31,16 @@ running = True
 while running:
     #Appliquer le background à la fenetre de jeu
     screen.blit(background, (0,-200))
-    
-    #Insérer l'image du joueur dans la fenetre de jeu
-    screen.blit(game.player.image, game.player.rect)
 
-    game.player.update_health_bar(screen)
+    if game.is_starting:
+        game.update(screen)
+    else:
+        screen.blit(play_button, (play_button_rect.x, play_button_rect.y))
+        screen.blit(banner, (banner_rect.x,0))
 
-    #Gestion du deplacement des projectiles
-    for projectile in game.player.all_projectiles:
-        projectile.move()
-    
-    #Gestion du deplacement des monstres
-    for monster in game.all_monsters:
-        monster.forward()
-        monster.update_health_bar(screen)
-    
-    #Dessiner les assets sur l'ecran
-    game.player.all_projectiles.draw(screen)
-    game.all_monsters.draw(screen)
-    
-    #Gestion des déplacements du joueur
-    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
-        game.player.move_right()
-    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 0:
-        game.player.move_left()
-        
-    
     pygame.display.flip()
     for event in pygame.event.get():
-        #Gestion des évènements
+        # Gestion des évènements
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
@@ -55,3 +51,6 @@ while running:
                 game.player.launch_projectile()
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if play_button_rect.collidepoint(event.pos):
+                game.game_start()

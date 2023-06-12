@@ -21,6 +21,8 @@ class Player(pygame.sprite.Sprite):
     def damage(self, amount):
         if self.health > 0:
             self.health -= amount
+        else:
+            self.game.game_over()
 
     def launch_projectile(self) -> None:
         self.all_projectiles.add(Projectile(self))
