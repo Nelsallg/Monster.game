@@ -1,13 +1,15 @@
 import pygame
 from modules.comet import Comet
+import random
 
 
 class CometFallEvent:
     def __init__(self, game):
         self.percent = 0
-        self.percent_speed = 33
+        self.percent_speed = 5
         self.all_comets = pygame.sprite.Group()
         self.game = game
+        self.comet_falling_mode = False
 
     def increment_percent(self):
         self.percent += self.percent_speed / 100
@@ -20,17 +22,16 @@ class CometFallEvent:
         self.percent = 0
 
     def comets_falling(self):
-        self.all_comets.add(Comet(self))
+        for i in range(4,random.randint(4, 20)):
+            self.all_comets.add(Comet(self))
 
     def attempt_fall(self):
-        if self.is_fulled_comet_bar():
-            print("pluie de comet")
+        if self.is_fulled_comet_bar() and len(self.game.all_monsters) == 0:
             self.comets_falling()
-            self.reset_comet_bar()
+            self.comet_falling_mode = True
 
     def update_comet_bar(self, surface) -> None:
         self.increment_percent()
-        self.attempt_fall()
         pygame.draw.rect(surface, (0, 0, 0), [0, surface.get_height() - 20, surface.get_width(), 15])
         pygame.draw.rect(surface, (241, 33, 33), [
             0, surface.get_height() - 20,

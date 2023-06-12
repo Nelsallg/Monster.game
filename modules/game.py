@@ -19,7 +19,7 @@ class Game():
         self.comet_event = CometFallEvent(self)
 
     def generate_random_spawn_monster(self):
-        for i in range(random.randint(1, 10)):
+        for i in range(1,random.randint(1, 10)):
             if i % 2 == 0:
                 self.spawn_monster()
 
@@ -29,6 +29,8 @@ class Game():
 
     def game_over(self):
         self.all_monsters = pygame.sprite.Group()
+        self.comet_event.all_comets = pygame.sprite.Group()
+        self.comet_event.reset_comet_bar()
         self.player.health = self.player.max_health
         self.is_starting = False
 

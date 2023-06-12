@@ -21,6 +21,9 @@ class Monster(pygame.sprite.Sprite):
             self.health = 100
             self.velocity = random.randint(1, 3)
             self.rect.x = 1000 + random.randint(0, 300)
+            if self.game.comet_event.is_fulled_comet_bar():
+                self.game.all_monsters.remove(self)
+                self.game.comet_event.attempt_fall()
 
     def update_health_bar(self, surface) -> None:
         bar_green_color = (111, 210, 46)
