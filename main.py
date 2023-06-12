@@ -19,13 +19,19 @@ while running:
     
     #Insérer l'image du joueur dans la fenetre de jeu
     screen.blit(game.player.image, game.player.rect)
-    
+
+    game.player.update_health_bar(screen)
+
+    #Gestion du deplacement des projectiles
     for projectile in game.player.all_projectiles:
         projectile.move()
-        
+    
+    #Gestion du deplacement des monstres
     for monster in game.all_monsters:
         monster.forward()
+        monster.update_health_bar(screen)
     
+    #Dessiner les assets sur l'ecran
     game.player.all_projectiles.draw(screen)
     game.all_monsters.draw(screen)
     
