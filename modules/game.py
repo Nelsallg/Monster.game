@@ -26,11 +26,11 @@ class Game():
     def game_start(self):
         self.is_starting = True
         self.generate_random_spawn_monster()
+        self.comet_event.all_comets = pygame.sprite.Group()
+        self.comet_event.reset_comet_bar()
 
     def game_over(self):
         self.all_monsters = pygame.sprite.Group()
-        self.comet_event.all_comets = pygame.sprite.Group()
-        self.comet_event.reset_comet_bar()
         self.player.health = self.player.max_health
         self.is_starting = False
 
