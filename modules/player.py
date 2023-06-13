@@ -1,19 +1,18 @@
 import pygame
 from modules.projectile import Projectile
-import random
+from modules.animation import AnimateSprite
 
 
 # Creer une class qui represente le joueur
-class Player(pygame.sprite.Sprite):
+class Player(AnimateSprite):
     def __init__(self, game) -> None:
-        super().__init__()
+        super().__init__("player")
         self.game = game
         self.health = 100
         self.max_health = 100
         self.attack = 10
         self.velocity = 5
         self.all_projectiles = pygame.sprite.Group()
-        self.image = pygame.image.load('assets/images/player.png')
         self.rect = self.image.get_rect()
         self.rect.x = 400
         self.rect.y = 500
@@ -26,6 +25,7 @@ class Player(pygame.sprite.Sprite):
 
     def launch_projectile(self) -> None:
         self.all_projectiles.add(Projectile(self))
+        self.animation_start()
 
     def update_health_bar(self, surface) -> None:
         bar_green_color = (111, 210, 46)
@@ -38,6 +38,9 @@ class Player(pygame.sprite.Sprite):
         bar_background_position = [self.rect.x + 50, self.rect.y, self.max_health, 10]
         pygame.draw.rect(surface, bar_background_color, bar_background_position)
         pygame.draw.rect(surface, bar_green_color, bar_position)
+
+    def update_animation(self):
+        self.animate()
 
     def move_right(self) -> None:
         if not self.game.check_collision(self, self.game.all_monsters):

@@ -49,6 +49,7 @@ class Game():
         for monster in self.all_monsters:
             monster.forward()
             monster.update_health_bar(screen)
+            monster.update_animation()
 
         for comet in self.comet_event.all_comets:
             comet.fall()
@@ -57,6 +58,7 @@ class Game():
         self.player.all_projectiles.draw(screen)
         self.all_monsters.draw(screen)
         self.comet_event.all_comets.draw(screen)
+        self.player.update_animation()
 
 
         # Gestion des déplacements du joueur
