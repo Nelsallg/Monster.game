@@ -1,6 +1,6 @@
 import pygame
 from modules.projectile import Projectile
-from modules.animation import AnimateSprite
+from animations.animation import AnimateSprite
 
 
 # Creer une class qui represente le joueur

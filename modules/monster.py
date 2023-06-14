@@ -1,6 +1,6 @@
 import pygame
 import random
-from modules.animation import AnimateSprite
+from animations.animation import AnimateSprite
 
 
 class Monster(AnimateSprite):

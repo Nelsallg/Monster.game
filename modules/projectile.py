@@ -1,5 +1,4 @@
 import pygame
-from modules.comet_event import CometFallEvent
 
 
 class Projectile(pygame.sprite.Sprite):

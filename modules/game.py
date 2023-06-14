@@ -2,7 +2,7 @@ from modules.player import Player
 from modules.monster import Monster
 import pygame
 import random
-from modules.comet_event import CometFallEvent
+from events.comet_event import CometFallEvent
 
 
 # Creer une seconde class qui represente le joueur
