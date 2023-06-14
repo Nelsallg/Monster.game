@@ -22,7 +22,7 @@ class CometFallEvent:
         self.percent = 0
 
     def comets_falling(self):
-        for i in range(4,random.randint(4, 20)):
+        for i in range(4, random.randint(4, 15)):
             self.all_comets.add(Comet(self))
 
     def attempt_fall(self):
@@ -35,4 +35,5 @@ class CometFallEvent:
         pygame.draw.rect(surface, (0, 0, 0), [0, surface.get_height() - 20, surface.get_width(), 15])
         pygame.draw.rect(surface, (241, 33, 33), [
             0, surface.get_height() - 20,
-            surface.get_width() / 100 * self.percent, 15])
+            surface.get_width() / 100 * self.percent, 15
+        ])

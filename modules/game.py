@@ -6,7 +6,7 @@ from modules.comet_event import CometFallEvent
 
 
 # Creer une seconde class qui represente le joueur
-class Game():
+class Game:
     def __init__(self) -> None:
         self.is_starting = False
         # Generer notre joueur
@@ -19,9 +19,8 @@ class Game():
         self.comet_event = CometFallEvent(self)
 
     def generate_random_spawn_monster(self):
-        for i in range(1,random.randint(1, 10)):
-            if i % 2 == 0:
-                self.spawn_monster()
+        for i in range(1, random.randint(1, 10)):
+            self.spawn_monster()
 
     def game_start(self):
         self.is_starting = True
@@ -30,9 +29,9 @@ class Game():
         self.comet_event.reset_comet_bar()
 
     def game_over(self):
-        self.all_monsters = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_starting = False
+        self.all_monsters = pygame.sprite.Group()
 
     def update(self, screen):
         # Insérer l'image du joueur dans la fenetre de jeu
@@ -59,7 +58,6 @@ class Game():
         self.all_monsters.draw(screen)
         self.comet_event.all_comets.draw(screen)
         self.player.update_animation()
-
 
         # Gestion des déplacements du joueur
         if self.pressed.get(pygame.K_RIGHT) and self.player.rect.x + self.player.rect.width < screen.get_width():

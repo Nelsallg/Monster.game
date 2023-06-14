@@ -24,7 +24,8 @@ class Player(AnimateSprite):
             self.game.game_over()
 
     def launch_projectile(self) -> None:
-        self.all_projectiles.add(Projectile(self))
+        projectile = Projectile(self)
+        self.all_projectiles.add(projectile)
         self.animation_start()
 
     def update_health_bar(self, surface) -> None:

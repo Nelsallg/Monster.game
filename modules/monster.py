@@ -47,7 +47,7 @@ class Monster(AnimateSprite):
         else:
             self.game.player.damage(self.attack)
 
-    def zombie_arme(self):
+    def zombie_arms(self):
         self.image = pygame.image.load('assets/images/zombie.png')
         self.rect = self.image.get_rect()
         self.rect.x = 400
