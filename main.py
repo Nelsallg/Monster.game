@@ -9,7 +9,7 @@ from settings.settings import *
 # Gérer les propriétés de la fenetre de jeu
 pygame.display.set_caption("Monster")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-clock = pygame.time.clock()
+clock = pygame.time.Clock()
 
 background = ImageResizer.resize(pygame.image.load('assets/images/bg_1080x617_bg_on_boat_night.jpg'), screen)
 
