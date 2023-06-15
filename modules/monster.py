@@ -1,6 +1,7 @@
 import pygame
 import random
 from animations.animation import AnimateSprite
+from tools.screen import replace_by_viewheight
 
 
 class Monster(AnimateSprite):
@@ -12,7 +13,7 @@ class Monster(AnimateSprite):
         self.attack = 0.3
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0, 300)
-        self.rect.y = 540
+        self.rect.y = replace_by_viewheight(180)
         self.velocity = random.randint(1, 3)
         self.animation_start()
 

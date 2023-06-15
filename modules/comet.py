@@ -1,5 +1,6 @@
 import pygame
 import random
+from tools.screen import replace_by_viewheight
 
 
 class Comet(pygame.sprite.Sprite):
@@ -20,7 +21,7 @@ class Comet(pygame.sprite.Sprite):
 
     def fall(self):
         self.rect.y += self.velocity
-        if self.rect.y >= 500:
+        if self.rect.y >= replace_by_viewheight(220):
             self.remove()
         if self.comet_event.game.check_collision(self, self.comet_event.game.all_players):
             self.remove()

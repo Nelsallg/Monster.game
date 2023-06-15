@@ -1,14 +1,17 @@
 import pygame
 from modules.game import Game
 import math
+import modules.image_resizer as ImageResizer
+from sys import exit
+from settings.settings import *
 
-pygame.init()
 
 # Gérer les propriétés de la fenetre de jeu
 pygame.display.set_caption("Monster")
-screen = pygame.display.set_mode((1080, 720))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+clock = pygame.time.clock()
 
-background = pygame.image.load('assets/images/bg.jpg')
+background = ImageResizer.resize(pygame.image.load('assets/images/bg_1080x617_bg_on_boat_night.jpg'), screen)
 
 # Gestion de la banniere
 banner = pygame.image.load('assets/images/banner.png')
@@ -29,7 +32,7 @@ game = Game()
 running = True
 while running:
     # Appliquer le background à la fenetre de jeu
-    screen.blit(background, (0, -200))
+    screen.blit(background, (0, 0))
 
     if game.is_starting:
         game.update(screen)
@@ -44,6 +47,7 @@ while running:
             running = False
             pygame.quit()
             print("Fermeture de la fenetre en cours...")
+            exit()
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
             if event.key == pygame.K_SPACE:
@@ -53,3 +57,4 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if play_button_rect.collidepoint(event.pos):
                 game.game_start()
+    clock.tick(FPS)

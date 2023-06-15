@@ -1,6 +1,7 @@
 import pygame
 from modules.projectile import Projectile
 from animations.animation import AnimateSprite
+from tools.screen import replace_by_viewheight
 
 
 # Creer une class qui represente le joueur
@@ -15,7 +16,8 @@ class Player(AnimateSprite):
         self.all_projectiles = pygame.sprite.Group()
         self.rect = self.image.get_rect()
         self.rect.x = 400
-        self.rect.y = 500
+        self.rect.y = replace_by_viewheight(220)
+        print(self.rect.y)
 
     def damage(self, amount):
         if self.health > 0:
